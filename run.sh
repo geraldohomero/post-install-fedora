@@ -24,11 +24,13 @@ PROGRAMS_TO_INSTALL_DNF=(
   firewall-config
   git
   gnome-font-viewer
+  gnome-tweaks
   gh
   steam
   code
   yt-dlp
   fastfetch
+  vlc
 )
 
 PROGRAMS_TO_INSTALL_FLATPAK=(
