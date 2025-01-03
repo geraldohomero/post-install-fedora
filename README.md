@@ -11,13 +11,11 @@ This is a Bash script designed to automate the post-installation setup of Fedora
 - **Internet Check**: Verifies internet connectivity before proceeding.
 - **Android SDK Setup**: Adds Android SDK to the system PATH for development purposes.
 
----
 ## Prerequisites
 
 - A fresh installation of Fedora.
 - Internet connection.
 - Administrative privileges (sudo access).
----
 
 ## How to Use
 
