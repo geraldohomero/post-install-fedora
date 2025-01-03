@@ -1,7 +1,5 @@
 RED='\e[1;91m'
 GREEN='\e[1;92m'
-BLUE='\e[1;94m'
-ORANGE='\e[1;93m'
 NO_COLOR='\e[0m'
 
 check_internet() {
