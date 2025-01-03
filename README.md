@@ -22,8 +22,10 @@ This is a Bash script designed to automate the post-installation setup of Fedora
 ## How to Use
 
 1. **Download the Script**:
-   - Clone this repository or download the script directly
-
+   - Clone this repository or download the script directly:
+   ```bash
+   git clone https://github.com/geraldohomero/post-install-fedora.git
+   ```
 2. **Make the Script Executable**:
    ```bash
    chmod +x run.sh
