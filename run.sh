@@ -25,6 +25,7 @@ PROGRAMS_TO_INSTALL_DNF=(
   git
   gnome-font-viewer
   gnome-tweaks
+  gnome-themes-extra
   gh
   steam
   code
