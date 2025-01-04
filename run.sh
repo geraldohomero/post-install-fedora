@@ -11,13 +11,14 @@ NO_COLOR='\e[0m'
 
 DOWNLOAD_PROGRAMS_DIRECTORY="$HOME/Downloads/Programs"
 PROGRAMS_TO_INSTALL_RPM=(
-  
+
 )
 
 PROGRAMS_TO_INSTALL_DNF=(
   btop
   java-1.8.0-openjdk
   obs-studio
+  spyder
   hugo
   vim
   neovim
