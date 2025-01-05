@@ -1,174 +1,55 @@
 #!/usr/bin/env bash
-#-----------https://github.com/geraldohomero/-------------#
-#----------https://geraldohomero.github.io/---------------#
-#------------A personal script project-------------------#
-
 RED='\e[1;91m'
 GREEN='\e[1;92m'
 BLUE='\e[1;94m'
 ORANGE='\e[1;93m'
+PURPLE='\e[1;95m'
 NO_COLOR='\e[0m'
 
-DOWNLOAD_PROGRAMS_DIRECTORY="$HOME/Downloads/Programs"
-PROGRAMS_TO_INSTALL_RPM=(
+# Change directory to the "Downloads" directory
+cd "$HOME/Downloads/post-install-fedora"
 
-)
+# Make the scripts on /src/ executable
+chmod +x ./src/post-install.sh ./src/alias.sh ./src/homeScript.sh ./src/devEnv.sh ./src/githubCloneAndConfig.sh ./src/dnf-config.sh
 
-PROGRAMS_TO_INSTALL_DNF=(
-  btop
-  java-1.8.0-openjdk
-  obs-studio
-  spyder
-  hugo
-  vim
-  neovim
-  firewall-config
-  git
-  gnome-font-viewer
-  gnome-tweaks
-  gnome-themes-extra
-  gh
-  steam
-  code
-  yt-dlp
-  fastfetch
-  vlc
-)
 
-PROGRAMS_TO_INSTALL_FLATPAK=(
-  org.qbittorrent.qBittorrent
-  org.kde.okular
-  org.zotero.Zotero
-  org.gnome.Characters
-  org.gnome.World.PikaBackup
-  com.bitwarden.desktop
-  com.brave.Browser
-  com.heroicgameslauncher.hgl
-  com.microsoft.Edge
-  com.spotify.Client
-  com.axosoft.GitKraken
-  com.github.tchx84.Flatseal
-  it.mijorus.gearlever
-  com.github.tenderowl.frog
-  com.google.AndroidStudio
-  md.obsidian.Obsidian
-  nl.hjdskes.gcolor3
-  io.gitlab.librewolf-community
-  io.missioncenter.MissionCenter
-  rest.insomnia.Insomnia
-)
 
-# Function to check internet connectivity
-check_internet() {
-  if ! ping -c 1 8.8.8.8 -q &> /dev/null; then
-    echo -e "${RED}[ERROR] - Your computer does not have an Internet connection.${NO_COLOR}"
-    exit 1
-  else
-    echo -e "${GREEN}[INFO] - Internet connection verified.${NO_COLOR}"
-  fi
-}
+echo -e "${GREEN}[INFO] - Optimizing DNF configuration...${NO_COLOR}"
+sleep 2
 
-# Function to check if a program is installed
-check_program_installed() {
-  local program=$1
-  if ! command -v "$program" &> /dev/null; then
-    echo -e "${RED}[ERROR] - The $program program is not installed.${NO_COLOR}"
-    echo -e "${GREEN}[INFO] - Installing $program...${NO_COLOR}"
-    sudo dnf install "$program" -y &> /dev/null || { echo -e "${RED}[ERROR] - Failed to install $program.${NO_COLOR}"; exit 1; }
-  else
-    echo -e "${ORANGE}[INFO] - The $program program is already installed.${NO_COLOR}"
-  fi
-}
+# Run the DNF configuration optimization script
+./src/dnf-config.sh
 
-#--------------Validations-------------#
-check_internet
-check_program_installed wget
+echo -e "${GREEN}[INFO] - Post-installation script will be executed.${NO_COLOR}"
+sleep 2
 
-# Updates and upgrades #
-upgrade_cleanup () {
-  echo -e "${GREEN}[INFO] - Performing upgrade and cleanup...${NO_COLOR}"
-  sleep 1
-  sudo dnf clean all
-  sudo dnf check
-  sudo dnf upgrade -y
-  sudo dnf autoremove -y
-  flatpak update -y
-}
+# Add after making scripts executable and before running post-install.sh
+echo -e "${GREEN}[INFO] - Configuring .bash_aliases in .bashrc...${NO_COLOR}"
+sleep 2
 
-# Installing packages and programs #
-install_dnf_packages() {
-  # Enable RPM Fusion repositories
-  echo -e "${GREEN}[INFO] - Enabling RPM Fusion repositories...${NO_COLOR}"
-  sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-  sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# Run the .bash_aliases script
+./src/alias.sh
 
-  # Enable VS Code repository
-  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-  sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+# Run the post-install script
+./src/post-install.sh
 
-  for program in ${PROGRAMS_TO_INSTALL_DNF[@]}; do
-    if ! rpm -q "$program" &> /dev/null; then
-      echo -e "${GREEN}[INFO] - Installing $program...${NO_COLOR}"
-      sudo dnf install "$program" -y &> /dev/null || { echo -e "${RED}[ERROR] - Failed to install $program.${NO_COLOR}"; exit 1; }
-    else
-      echo -e "${ORANGE}[INFO] - The package $program is already installed.${NO_COLOR}"
-    fi
-  done
-}
+echo -e "${GREEN}[INFO] - .bash_aliases script will be executed.${NO_COLOR}"
+sleep 2
 
-install_flatpak () {
-  # Add Flathub repository
-  if ! flatpak remote-list | grep -q "flathub"; then
-    echo -e "${GREEN}[INFO] - Installing Flathub...${NO_COLOR}"
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  else
-    echo -e "${ORANGE}[INFO] - Flathub repository is already added.${NO_COLOR}"
-  fi
-  
-  # Install flatpak packages
-  for program in ${PROGRAMS_TO_INSTALL_FLATPAK[@]}; do
-    if ! flatpak list | grep -q $program; then
-      echo -e "${GREEN}[INFO] - Installing $program...${NO_COLOR}"
-      flatpak install flathub $program -y
-    else
-      echo -e "${ORANGE}[INFO] - $program flatpak is already installed.${NO_COLOR}"
-    fi
-  done
-}
+echo -e "${PURPLE}[INFO] - Now some additional steps will be executed.${NO_COLOR}"
+sleep 2
 
-download_rpm_packages () {
-  # Add the directory for downloads if it does not exist
-  [[ ! -d "$DOWNLOAD_PROGRAMS_DIRECTORY" ]] && mkdir "$DOWNLOAD_PROGRAMS_DIRECTORY"
+# Add update.sh, syncthingStatus.sh and swapAudio. to home directory
+./src/homeScript.sh
 
-  for url in "${PROGRAMS_TO_INSTALL_RPM[@]}"; do
-    package_name=$(basename "$url")
-    destination_path="$DOWNLOAD_PROGRAMS_DIRECTORY/$package_name"
+# Clone all repositories from USER on GitHub  #
+./src/githubCloneAndConfig.sh
 
-    echo -e "${GREEN}[INFO] - Downloading package from URL: $url${NO_COLOR}"
-    wget -c "$url" -P "$DOWNLOAD_PROGRAMS_DIRECTORY" &> /dev/null
+# Add some development tools like node, npm, nvm, dotnet, EntityFramework... 
+./src/devEnv.sh
 
-    echo -e "${GREEN}[INFO] - Installing package: $package_name${NO_COLOR}"
-    sudo dnf install "$destination_path" -y
-  done
-}
+# create fastfetch config file
+fastfetch --gen-config
 
-install_syncthing () {
-  echo -e "${GREEN}[INFO] - Installing Syncthing...${NO_COLOR}"
-  sudo dnf install syncthing -y
-  echo -e "${GREEN}[INFO] - Syncthing installation completed successfully.${NO_COLOR}"
-}
-
-# Android Studio
-add_android_sdk () {
-  echo -e "${GREEN}[INFO] - Adding Android SDK to the PATH...${NO_COLOR}"
-  echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.bashrc
-  echo 'export PATH=$PATH:$ANDROID_HOME/tools' >> ~/.bashrc
-}
-
-#----# Execution #----#
-install_dnf_packages
-upgrade_cleanup
-install_flatpak
-download_rpm_packages
-install_syncthing
-add_android_sdk
+echo -e "${GREEN}[SUCCESS] --- | --- | --- [SUCCESS]${NO_COLOR}"
+sleep 2
