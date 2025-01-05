@@ -28,7 +28,7 @@ post-install-fedora/
 │ ├── devEnv.sh # Development environment setup
 │ ├── dnf-config.sh # DNF package manager optimization
 │ ├── githubCloneAndConfig.sh # GitHub repository setup
-│ ├── homeScript.sh # Home directory utilities setup
+│ ├── homeScript.sh # Home directory utilities setup for `misc` 
 │ └── post-install.sh # Main installation script
 ├── misc/
 │ ├── update.sh # System update utility
