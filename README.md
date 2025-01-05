@@ -1,6 +1,12 @@
 # Fedora Post-Installation Script
 
-A comprehensive automation script for setting up a fresh Fedora installation with essential software, configurations, and development tools.
+A comprehensive automation script for setting up a fresh Fedora 41 installation with essential software, configurations, and development tools.
+
+>Note: The script was designed for Fedora Workstation, but it may also work on other Fedora-based distributions. However, please be cautious and ensure compatibility before running it on other systems.
+
+>Important: While the script aims to automate setup tasks, it's essential to review the code and understand what it does before running it on your machine. Ensure that you back up critical data before proceeding. The script provided is for educational purposes and comes with no warranty or support.
+
+[Pop!_OS (22.04) - Post Install](https://github.com/geraldohomero/post-install-pop-os)
 
 ## Features
 
