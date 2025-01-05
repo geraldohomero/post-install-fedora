@@ -12,6 +12,7 @@ A comprehensive automation script for setting up a fresh Fedora 41 installation 
 
 - 🔄 System Updates and Optimization
 - 📦 Essential Software Installation (DNF & Flatpak)
+- 🗂️ Enable RPM Fusion repositories
 - 🛠️ Development Environment Setup
 - 🔧 Custom Aliases Configuration
 - 🔐 GitHub Integration
