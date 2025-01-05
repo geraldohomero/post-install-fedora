@@ -24,7 +24,9 @@ CUSTOM_ALIASES=(
   'alias neofetch="fastfetch"'
   'alias fetch="fastfetch"'
   'alias swap="./swapAudio.sh"'
-  'alias anaconda="conda activate && anaconda-navigator"'
+  'alias anaconda="conda activate && QT_XCB_GL_INTEGRATION=none anaconda-navigator"'
+  # anaconda-navigator problem on Fedora 41 - Use QT_XCB_GL_INTEGRATION=none anaconda-navigator
+  # https://community.anaconda.cloud/t/anaconda-navigator-not-launching-in-fedora-41-gnome-wayland/89433
 )
 
 # Check if the script is run as root
