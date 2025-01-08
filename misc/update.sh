@@ -13,7 +13,6 @@ check_internet() {
 
 upgrade_cleanup () {
   echo -e "${GREEN}[INFO] - Performing upgrade and cleanup...${NO_COLOR}"
-  sleep 1
   sudo dnf check
   sudo dnf upgrade -y
   sudo dnf autoremove -y
