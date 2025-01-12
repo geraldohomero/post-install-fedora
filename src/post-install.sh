@@ -18,11 +18,10 @@ PROGRAMS_TO_INSTALL_DNF=(
   btop
   java-1.8.0-openjdk
   obs-studio
-  spyder
   hugo
   vim
   neovim
-  easyeffectseasy
+  easyeffects
   firewall-config
   git
   gnome-font-viewer
@@ -42,16 +41,19 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   org.zotero.Zotero
   org.gnome.Characters
   org.gnome.World.PikaBackup
+  org.gnome.Cheese
+  org.gabmus.hydrapaper
   com.bitwarden.desktop
   com.brave.Browser
+  com.github.tenderowl.frog
+  com.google.AndroidStudio
   com.heroicgameslauncher.hgl
   com.microsoft.Edge
   com.spotify.Client
   com.axosoft.GitKraken
   com.github.tchx84.Flatseal
+  com.mattjakeman.ExtensionManager
   it.mijorus.gearlever
-  com.github.tenderowl.frog
-  com.google.AndroidStudio
   md.obsidian.Obsidian
   nl.hjdskes.gcolor3
   io.gitlab.librewolf-community
