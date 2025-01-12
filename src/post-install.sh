@@ -38,6 +38,7 @@ PROGRAMS_TO_INSTALL_DNF=(
 PROGRAMS_TO_INSTALL_FLATPAK=(
   org.qbittorrent.qBittorrent
   org.kde.okular
+  org.kde.labplot2
   org.zotero.Zotero
   org.gnome.Characters
   org.gnome.World.PikaBackup
