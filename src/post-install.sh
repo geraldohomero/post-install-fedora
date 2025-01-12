@@ -44,6 +44,7 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   org.gnome.World.PikaBackup
   org.gnome.Cheese
   org.gabmus.hydrapaper
+  org.onlyoffice.desktopeditors
   com.bitwarden.desktop
   com.brave.Browser
   com.github.tenderowl.frog
