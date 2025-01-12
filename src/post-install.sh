@@ -22,6 +22,7 @@ PROGRAMS_TO_INSTALL_DNF=(
   hugo
   vim
   neovim
+  easyeffectseasy
   firewall-config
   git
   gnome-font-viewer
