@@ -1,18 +1,13 @@
 #!/usr/bin/env bash
-RED='\e[1;91m'
-GREEN='\e[1;92m'
-BLUE='\e[1;94m'
-ORANGE='\e[1;93m'
-PURPLE='\e[1;95m'
-NO_COLOR='\e[0m'
+source src/config.sh
 
 # Change directory to the "Downloads" directory
 cd "$HOME/Downloads/post-install-fedora"
 
-# Make the scripts on /src/ executable
-chmod +x ./src/post-install.sh ./src/alias.sh ./src/homeScript.sh ./src/devEnv.sh ./src/githubCloneAndConfig.sh ./src/dnf-config.sh
 
-
+# Make all files in src/ directory executable
+echo -e "${GREEN}[INFO] - Making all files in src/ directory executable...${NO_COLOR}"
+chmod +x ./src/*
 
 echo -e "${GREEN}[INFO] - Optimizing DNF configuration...${NO_COLOR}"
 sleep 2
@@ -47,6 +42,9 @@ sleep 2
 
 # Add some development tools like node, npm, nvm, dotnet, EntityFramework... 
 ./src/devEnv.sh
+
+# Alt + tab config
+./src/altTab.sh
 
 # create fastfetch config file
 fastfetch --gen-config

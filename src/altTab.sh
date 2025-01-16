@@ -1,8 +1,6 @@
 RED='\e[1;91m'
 GREEN='\e[1;92m'
-BLUE='\e[1;94m'
 ORANGE='\e[1;93m'
-PURPLE='\e[1;95m'
 NO_COLOR='\e[0m'
 
 
@@ -23,4 +21,5 @@ altTab() {
     dconf write /org/gnome/desktop/wm/keybindings/switch-applications-backward "['']"
 
     echo -e "${GREEN}Alt+Tab configuration complete!${NO_COLOR}"
+    
 }
