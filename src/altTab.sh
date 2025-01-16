@@ -3,7 +3,6 @@ GREEN='\e[1;92m'
 ORANGE='\e[1;93m'
 NO_COLOR='\e[0m'
 
-
 altTab() {
     echo -e "${BLUE}Configuring Alt+Tab window switching...${NO_COLOR}"
     

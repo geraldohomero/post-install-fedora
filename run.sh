@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-source src/config.sh
+RED='\e[1;91m'
+GREEN='\e[1;92m'
+BLUE='\e[1;94m'
+ORANGE='\e[1;93m'
+NO_COLOR='\e[0m'
 
 # Change directory to the "Downloads" directory
 cd "$HOME/Downloads/post-install-fedora"
