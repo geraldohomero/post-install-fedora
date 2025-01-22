@@ -14,9 +14,9 @@ check_internet() {
 upgrade_cleanup () {
   echo -e "${GREEN}[INFO] - Performing upgrade and cleanup...${NO_COLOR}"
   sudo dnf check
-  sudo dnf upgrade -y
-  sudo dnf autoremove -y
-  flatpak update -y
+  sudo dnf upgrade
+  sudo dnf autoremove
+  flatpak update
 }
 
 check_internet
