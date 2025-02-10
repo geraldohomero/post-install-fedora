@@ -50,8 +50,9 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   com.github.tenderowl.frog
   com.google.AndroidStudio
   com.heroicgameslauncher.hgl
+  com.github.wwmm.easyeffects
   com.microsoft.Edge
-  com.spotify.Client
+  com.github.KRTirtho.Spotube
   com.axosoft.GitKraken
   com.github.tchx84.Flatseal
   com.mattjakeman.ExtensionManager
