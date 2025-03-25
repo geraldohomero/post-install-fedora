@@ -25,6 +25,7 @@ A comprehensive automation script for setting up a fresh Fedora 41 Workstation i
 post-install-fedora/
 ├── src/
 │ ├── alias.sh # Custom shell aliases configuration
+│ └── altTab.sh # Alt+Tab behavior configuration
 │ ├── devEnv.sh # Development environment setup
 │ ├── dnf-config.sh # DNF package manager optimization
 │ ├── githubCloneAndConfig.sh # GitHub repository setup
