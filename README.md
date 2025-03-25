@@ -74,6 +74,13 @@ post-install-fedora/
    - Clones user repositories
    - Sets up Git global configuration
 
+7. **altTab.sh**
+   - Configures Alt+Tab behavior
+   - Enables window previews for all open applications
+
+8. **homeScript.sh**
+   - Add update.sh, syncthingStatus.sh and swapAudio. to home directory
+
 ### Miscellaneous Utilities
 
 7. **misc/update.sh**
