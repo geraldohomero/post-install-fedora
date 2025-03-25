@@ -22,3 +22,4 @@ else
   echo -e "${ORANGE}[INFO] - Node.js is already installed.${NO_COLOR}"
 fi
 
+# More...
