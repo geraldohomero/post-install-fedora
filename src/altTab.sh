@@ -20,5 +20,6 @@ altTab() {
     dconf write /org/gnome/desktop/wm/keybindings/switch-applications-backward "['']"
 
     echo -e "${GREEN}Alt+Tab configuration complete!${NO_COLOR}"
-    
 }
+
+altTab
