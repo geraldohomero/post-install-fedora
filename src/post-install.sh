@@ -171,10 +171,16 @@ add_android_sdk () {
   echo 'export PATH=$PATH:$ANDROID_HOME/tools' >> ~/.bashrc
 }
 
+add_open_with_code () {
+ echo -e "${GREEN}[INFO] - Adding Open With Code Extension (wget)...${NO_COLOR}"
+ wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh | bash
+}
+
 #----# Execution #----#
 install_dnf_packages
 upgrade_cleanup
 install_flatpak
 download_rpm_packages
+add_open_with_code
 install_syncthing
 add_android_sdk
