@@ -6,7 +6,7 @@ A comprehensive automation script for setting up a fresh Fedora 42 Workstation i
 
 >Important: While the script aims to automate setup tasks, it's essential to review the code and understand what it does before running it on your machine. Ensure that you back up critical data before proceeding. The script provided is for educational purposes and comes with no warranty or support.
 
-[Fedora 41 - Post Install](https://github.com/geraldohomero/post-install-fedora)
+[Fedora 42 - Post Install](https://github.com/geraldohomero/post-install-fedora)
 
 [Pop!_OS (22.04) - Post Install](https://github.com/geraldohomero/post-install-pop-os)
 
