@@ -35,6 +35,13 @@ sleep 2
 echo -e "${GREEN}[INFO] - .bash_aliases script will be executed.${NO_COLOR}"
 sleep 2
 
+
+echo -e "${GREEN}[INFO] - Configuring Windscribe VPN...${NO_COLOR}"
+sleep 2
+
+# Run the VPN installation script
+./src/vpn.sh
+
 echo -e "${PURPLE}[INFO] - Now some additional steps will be executed.${NO_COLOR}"
 sleep 2
 
