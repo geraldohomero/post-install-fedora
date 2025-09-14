@@ -26,6 +26,7 @@ CUSTOM_ALIASES=(
   'alias swap="./swapAudio.sh"'
   'alias anaconda="conda activate && QT_XCB_GL_INTEGRATION=none anaconda-navigator"'
   'alias mega-instances="./megasync-manager.sh"'
+  'alias mega="./megasync-manager.sh"'
   # anaconda-navigator problem on Fedora 41 - Use QT_XCB_GL_INTEGRATION=none anaconda-navigator
   # https://community.anaconda.cloud/t/anaconda-navigator-not-launching-in-fedora-41-gnome-wayland/89433
 )
