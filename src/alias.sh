@@ -1,32 +1,28 @@
 #!/bin/bash
-#####################################################################################
-## This script adds custom aliases defined in the CUSTOM_ALIASES array to          ##
-## the .bash_aliases file in the user's home directory, ensuring convenient        ##
-## access to frequently used commands. Additionally, it includes a safety check to ## 
-## prevent execution as root, mitigating accidental modification of system files.  ##
-#####################################################################################
+########################################################
+# Script to configure .bash_aliases and add custom aliases #
+########################################################
 
-# Your custom aliases
 CUSTOM_ALIASES=(
   'alias ips="ip -c -br a"'
   'alias his="history|grep"'
   'alias ports="netstat -tulanp"'
-  'alias update="./update.sh"'
-  'alias upd="./update.sh"'
-  'alias up="./update.sh"'
+  'alias update="$HOME/update.sh"'
+  'alias upd="$HOME/update.sh"'
+  'alias up="$HOME/update.sh"'
   'alias plexstatus="sudo service plexmediaserver status"'
   'alias plexstart="sudo service plexmediaserver start"'
   'alias plexstop="sudo service plexmediaserver stop"'
   'alias mysqlstatus="sudo systemctl status mysql"'
   'alias mysqlstart="sudo systemctl start mysql"'
   'alias mysqlstop="sudo systemctl stop mysql"'
-  'alias syncstatus="./syncthingStatus.sh"'
+  'alias syncstatus="$HOME/syncthingStatus.sh"'
   'alias neofetch="fastfetch"'
   'alias fetch="fastfetch"'
-  'alias swap="./swapAudio.sh"'
+  'alias swap="$HOME/swapAudio.sh"'
   'alias anaconda="conda activate && QT_XCB_GL_INTEGRATION=none anaconda-navigator"'
-  'alias mega-instances="./megasync-manager.sh"'
-  'alias mega="./megasync-manager.sh"'
+  'alias mega-instances="$HOME/megasync-manager.sh"'
+  'alias mega="$HOME/megasync-manager.sh"'
   # anaconda-navigator problem on Fedora 41 - Use QT_XCB_GL_INTEGRATION=none anaconda-navigator
   # https://community.anaconda.cloud/t/anaconda-navigator-not-launching-in-fedora-41-gnome-wayland/89433
 )

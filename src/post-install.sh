@@ -20,7 +20,6 @@ PROGRAMS_TO_INSTALL_DNF=(
   obs-studio
   hugo
   vim
-  neovim
   easyeffects
   firewall-config
   git
@@ -38,7 +37,6 @@ PROGRAMS_TO_INSTALL_DNF=(
 PROGRAMS_TO_INSTALL_FLATPAK=(
   org.qbittorrent.qBittorrent
   org.kde.okular
-  org.kde.labplot2
   org.zotero.Zotero
   org.gnome.Characters
   org.gnome.World.PikaBackup
@@ -47,12 +45,12 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   org.onlyoffice.desktopeditors
   com.bitwarden.desktop
   com.brave.Browser
+  com.ranfdev.DistroShelf
   com.github.tenderowl.frog
   com.google.AndroidStudio
   com.heroicgameslauncher.hgl
   com.github.wwmm.easyeffects
   com.microsoft.Edge
-  com.github.KRTirtho.Spotube
   com.axosoft.GitKraken
   com.github.tchx84.Flatseal
   com.mattjakeman.ExtensionManager
@@ -62,6 +60,7 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   io.gitlab.librewolf-community
   io.missioncenter.MissionCenter
   rest.insomnia.Insomnia
+  net.ankiweb.Anki  
 )
 
 # Function to check internet connectivity
