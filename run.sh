@@ -35,7 +35,6 @@ sleep 2
 echo -e "${GREEN}[INFO] - .bash_aliases script will be executed.${NO_COLOR}"
 sleep 2
 
-
 echo -e "${GREEN}[INFO] - Configuring Windscribe VPN...${NO_COLOR}"
 sleep 2
 
@@ -48,17 +47,17 @@ sleep 2
 # Add update.sh, syncthingStatus.sh and swapAudio. to home directory
 ./src/homeScript.sh
 
-# Clone all repositories from USER on GitHub  #
-./src/githubCloneAndConfig.sh
-
-# Add some development tools like node, npm, nvm, dotnet, EntityFramework... 
-./src/devEnv.sh
+# Clone all repositories from USER on GitHub 
+# ./src/githubCloneAndConfig.sh
 
 # Alt + tab config
 ./src/altTab.sh
 
 # create fastfetch config file
 fastfetch --gen-config
+
+# Add some development tools like node, anaconda, R... 
+./src/devEnv.sh
 
 echo -e "${GREEN}[SUCCESS] --- | --- | --- [SUCCESS]${NO_COLOR}"
 sleep 2
