@@ -11,15 +11,19 @@ NO_COLOR='\e[0m'
 
 DOWNLOAD_PROGRAMS_DIRECTORY="$HOME/Downloads/Programs"
 PROGRAMS_TO_INSTALL_RPM=(
-#links here
+https://github.com/OpenTabletDriver/OpenTabletDriver/releases/latest/download/opentabletdriver-0.6.6.1-1.x86_64.rp
+https://mega.nz/linux/repo/Fedora_42/x86_64/megasync-Fedora_42.x86_64.rpm
+https://mega.nz/linux/repo/Fedora_42/x86_64/nautilus-megasync-Fedora_42.x86_64.rpm
 )
 
 PROGRAMS_TO_INSTALL_DNF=(
   btop
-  java-1.8.0-openjdk
+  adoptium-temurin-java-repository
+  temurin-8-jdk
   obs-studio
   hugo
   vim
+  mpv
   easyeffects
   firewall-config
   git
@@ -43,24 +47,27 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   org.gnome.Cheese
   org.gabmus.hydrapaper
   org.onlyoffice.desktopeditors
+  org.x.Warpinator
+  org.feichtmeier.Musicpod
   com.bitwarden.desktop
   com.brave.Browser
   com.ranfdev.DistroShelf
   com.github.tenderowl.frog
-  com.google.AndroidStudio
   com.heroicgameslauncher.hgl
   com.github.wwmm.easyeffects
-  com.microsoft.Edge
+  com.github.xournalpp.xournalpp
   com.axosoft.GitKraken
   com.github.tchx84.Flatseal
   com.mattjakeman.ExtensionManager
-  it.mijorus.gearlever
   md.obsidian.Obsidian
   nl.hjdskes.gcolor3
-  io.gitlab.librewolf-community
+  it.mijorus.gearlever
+  io.github.swordpuffin.wardrobe
   io.missioncenter.MissionCenter
-  rest.insomnia.Insomnia
-  net.ankiweb.Anki  
+  io.dbeaver.DBeaverCommunity
+  net.ankiweb.Anki 
+  net.mullvad.MullvadBrowser
+  fm.reaper.Reaper
 )
 
 # Function to check internet connectivity
@@ -84,7 +91,7 @@ check_program_installed() {
     echo -e "${ORANGE}[INFO] - The $program program is already installed.${NO_COLOR}"
   fi
 }
-
+PROGRAMS_TO_INSTALL_RPM
 #--------------Validations-------------#
 check_internet
 check_program_installed wget

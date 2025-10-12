@@ -35,3 +35,5 @@ if ! command -v conda &> /dev/null; then
 else
   echo -e "${ORANGE}[INFO] - Anaconda is already installed.${NO_COLOR}"
 fi
+
+# R and RStudio will be added with Distrobox or Podman (Using Ubuntu)
