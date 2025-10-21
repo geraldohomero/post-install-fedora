@@ -25,6 +25,8 @@ CUSTOM_ALIASES=(
   'alias mega="$HOME/megasync-manager.sh"'
   # anaconda-navigator problem on Fedora 41 - Use QT_XCB_GL_INTEGRATION=none anaconda-navigator
   # https://community.anaconda.cloud/t/anaconda-navigator-not-launching-in-fedora-41-gnome-wayland/89433
+  'alias gedit="gnome-text-editor"'
+  'alias gted="gnome-text-editor"'
 )
 
 # Check if the script is run as root
