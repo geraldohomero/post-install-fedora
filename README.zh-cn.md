@@ -1,12 +1,12 @@
 # Fedora 安装后脚本
 
-一个全面的自动化脚本，用于为新安装的 Fedora 42 Workstation 设置必要的软件、配置和开发工具。
+一个全面的自动化脚本，用于为新安装的 Fedora 43 Workstation 设置必要的软件、配置和开发工具。
 
-> 注意：该脚本专为 Fedora 42 Workstation 设计，但也可能适用于其他基于 Fedora 的发行版。但在其他系统上运行之前，请务必谨慎并确保兼容性。
+> 注意：该脚本专为 Fedora 43 Workstation 设计，但也可能适用于其他基于 Fedora 的发行版。但在其他系统上运行之前，请务必谨慎并确保兼容性。
 
 > 重要提示：虽然该脚本旨在自动执行设置任务，但在您的机器上运行之前，请务必查看代码并了解其功能。在继续操作之前，请确保备份关键数据。所提供的脚本仅用于教育目的，不提供任何保证或支持。
 
-[Fedora 42 - Post Install](https://github.com/geraldohomero/post-install-fedora)
+[Fedora 43 - Post Install](https://github.com/geraldohomero/post-install-fedora)
 
 [Pop\!\_OS (22.04) - Post Install](https://github.com/geraldohomero/post-install-pop-os)
 
