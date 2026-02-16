@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
+
 RED='\e[1;91m'
 GREEN='\e[1;92m'
 BLUE='\e[1;94m'
+PURPLE='\e[1;95m'
 ORANGE='\e[1;93m'
 NO_COLOR='\e[0m'
 
-# Change directory to the "Downloads" directory
-cd "$HOME/Downloads/post-install-fedora"
+# Ensure the script is not run as root
+if [[ ${EUID:-$(id -u)} -eq 0 ]]; then
+  echo -e "${RED}[ERROR] - Do not run run.sh with sudo/root. Run it as your regular user.${NO_COLOR}"
+  exit 1
+fi
+
+# Change to repository directory (directory where this script is located)
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 
 # Make all files in src/ directory executable
@@ -47,8 +57,22 @@ sleep 2
 # Add update.sh, syncthingStatus.sh and swapAudio. to home directory
 ./src/homeScript.sh
 
-# Clone all repositories from USER on GitHub 
-# ./src/githubCloneAndConfig.sh
+# Clone all repositories from USER on GitHub (optional)
+echo -e "${GREEN}[INFO] - Do you want to run the GitHub step (clone + git config)? [y/N]${NO_COLOR}"
+read -r RUN_GITHUB_SETUP
+
+case "$RUN_GITHUB_SETUP" in
+  [yY]|[yY][eE][sS])
+    echo -e "${GREEN}[INFO] - Running githubCloneAndConfig.sh...${NO_COLOR}"
+    ./src/githubCloneAndConfig.sh || {
+      echo -e "${RED}[ERROR] - Failed to run githubCloneAndConfig.sh.${NO_COLOR}"
+      exit 1
+    }
+    ;;
+  *)
+    echo -e "${ORANGE}[INFO] - GitHub step skipped by user.${NO_COLOR}"
+    ;;
+esac
 
 # Alt + tab config
 ./src/altTab.sh

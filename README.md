@@ -160,7 +160,7 @@ chmod +x run.sh
 3. Run the script:
 
 ```bash
-sudo ./run.sh
+./run.sh
 ```
 
 ## Prerequisites

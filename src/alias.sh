@@ -1,4 +1,6 @@
 #!/bin/bash
+set -Eeuo pipefail
+
 ########################################################
 # Script to configure .bash_aliases and add custom aliases #
 ########################################################
@@ -100,7 +102,7 @@ add_aliases() {
 
   # Check if .bash_aliases file exists or create it
   if [[ ! -e "$BASH_ALIASES_FILE" ]]; then
-    touch "$BASH_ALIASES_FILE"
+    touch "$BASH_ALIASES_FILE" || { echo -e "${RED}[ERROR] - Failed to create $BASH_ALIASES_FILE${NO_COLOR}"; exit 1; }
     echo "Created .bash_aliases file in the home directory."
   else
     echo ".bash_aliases file already exists in the home directory."
@@ -121,6 +123,7 @@ add_aliases() {
 configure_bashrc
 add_aliases
 
-# Source the updated .bashrc
-echo -e "${GREEN}[INFO] - Reloading .bashrc...${NO_COLOR}"
-source "$BASHRC_FILE"
+# Do not source .bashrc from this non-interactive script.
+# Some system bashrc files rely on interactive-only variables and may fail with `set -u`.
+echo -e "${GREEN}[INFO] - Alias setup completed.${NO_COLOR}"
+echo -e "${BLUE}[INFO] - Open a new terminal or run: source ~/.bashrc${NO_COLOR}"

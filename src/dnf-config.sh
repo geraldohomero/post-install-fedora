@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
+
 RED='\e[1;91m'
 GREEN='\e[1;92m'
 BLUE='\e[1;94m'
@@ -80,9 +82,9 @@ errors=0
 # Add/Update DNF optimizations
 for key in "${!configs[@]}"; do
     if update_dnf_config "$key" "${configs[$key]}"; then
-        ((changes_made++))
+        changes_made=$((changes_made + 1))
     else
-        ((errors++))
+        errors=$((errors + 1))
     fi
 done
 

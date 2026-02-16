@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
+
 #-----------https://github.com/geraldohomero/-------------#
 #----------https://geraldohomero.github.io/---------------#
 #------------A personal script project-------------------#
@@ -11,16 +13,14 @@ NO_COLOR='\e[0m'
 
 DOWNLOAD_PROGRAMS_DIRECTORY="$HOME/Downloads/Programs"
 PROGRAMS_TO_INSTALL_RPM=(
-https://github.com/OpenTabletDriver/OpenTabletDriver/releases/latest/download/opentabletdriver-0.6.6.1-1.x86_64.rp
-https://mega.nz/linux/repo/Fedora_42/x86_64/megasync-Fedora_42.x86_64.rpm
-https://mega.nz/linux/repo/Fedora_42/x86_64/nautilus-megasync-Fedora_42.x86_64.rpm
+https://mega.nz/linux/repo/Fedora_43/x86_64/megasync-Fedora_43.x86_64.rpm
+https://mega.nz/linux/repo/Fedora_43/x86_64/nautilus-megasync-Fedora_43.x86_64.rpm
 )
 
 PROGRAMS_TO_INSTALL_DNF=(
   btop
   adoptium-temurin-java-repository
   temurin-8-jdk
-  obs-studio
   hugo
   vim
   mpv
@@ -31,6 +31,7 @@ PROGRAMS_TO_INSTALL_DNF=(
   gnome-tweaks
   gnome-themes-extra
   gh
+  hydrapaper
   steam
   code
   yt-dlp
@@ -44,11 +45,11 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   org.zotero.Zotero
   org.gnome.Characters
   org.gnome.World.PikaBackup
-  org.gnome.Cheese
-  org.gabmus.hydrapaper
+  org.localsend.localsend_app
   org.onlyoffice.desktopeditors
   org.x.Warpinator
   org.feichtmeier.Musicpod
+  org.rncbc.qpwgraph
   com.bitwarden.desktop
   com.brave.Browser
   com.ranfdev.DistroShelf
@@ -60,13 +61,14 @@ PROGRAMS_TO_INSTALL_FLATPAK=(
   com.github.tchx84.Flatseal
   com.mattjakeman.ExtensionManager
   md.obsidian.Obsidian
+  net.ankiweb.Anki 
+  net.mullvad.MullvadBrowser
+  net.opentabletdriver.OpenTabletDriver
   nl.hjdskes.gcolor3
   it.mijorus.gearlever
   io.github.swordpuffin.wardrobe
   io.missioncenter.MissionCenter
   io.dbeaver.DBeaverCommunity
-  net.ankiweb.Anki 
-  net.mullvad.MullvadBrowser
   fm.reaper.Reaper
 )
 
@@ -91,7 +93,7 @@ check_program_installed() {
     echo -e "${ORANGE}[INFO] - The $program program is already installed.${NO_COLOR}"
   fi
 }
-PROGRAMS_TO_INSTALL_RPM
+
 #--------------Validations-------------#
 check_internet
 check_program_installed wget
@@ -104,7 +106,7 @@ upgrade_cleanup () {
   sudo dnf check
   sudo dnf upgrade -y
   sudo dnf autoremove -y
-  flatpak update -y
+  sudo flatpak update --system -y
 }
 
 # Installing packages and programs #
@@ -118,7 +120,7 @@ install_dnf_packages() {
   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
   sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
-  for program in ${PROGRAMS_TO_INSTALL_DNF[@]}; do
+  for program in "${PROGRAMS_TO_INSTALL_DNF[@]}"; do
     if ! rpm -q "$program" &> /dev/null; then
       echo -e "${GREEN}[INFO] - Installing $program...${NO_COLOR}"
       sudo dnf install "$program" -y &> /dev/null || { echo -e "${RED}[ERROR] - Failed to install $program.${NO_COLOR}"; exit 1; }
@@ -130,30 +132,30 @@ install_dnf_packages() {
 
 install_flatpak () {
   # Add Flathub repository
-  if ! flatpak remote-list | grep -q "flathub"; then
+  if ! flatpak remotes --system --columns=name | grep -qx "flathub"; then
     echo -e "${GREEN}[INFO] - Installing Flathub...${NO_COLOR}"
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    sudo flatpak remote-add --system --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   else
-    echo -e "${ORANGE}[INFO] - Flathub repository is already added.${NO_COLOR}"
+    echo -e "${ORANGE}[INFO] - Flathub system repository is already added.${NO_COLOR}"
   fi
   
   # Install flatpak packages
-  for program in ${PROGRAMS_TO_INSTALL_FLATPAK[@]}; do
-    if ! flatpak list | grep -q $program; then
+  for program in "${PROGRAMS_TO_INSTALL_FLATPAK[@]}"; do
+    if ! flatpak list --system --app --columns=application | grep -qx "$program"; then
       echo -e "${GREEN}[INFO] - Installing $program...${NO_COLOR}"
-      flatpak install flathub $program -y
+      sudo flatpak install --system flathub "$program" -y
     else
-      echo -e "${ORANGE}[INFO] - $program flatpak is already installed.${NO_COLOR}"
+      echo -e "${ORANGE}[INFO] - $program flatpak is already installed (system).${NO_COLOR}"
     fi
   done
 }
 
 download_rpm_packages () {
   # Add the directory for downloads if it does not exist
-  [[ ! -d "$DOWNLOAD_PROGRAMS_DIRECTORY" ]] && mkdir "$DOWNLOAD_PROGRAMS_DIRECTORY"
+  [[ ! -d "$DOWNLOAD_PROGRAMS_DIRECTORY" ]] && mkdir -p "$DOWNLOAD_PROGRAMS_DIRECTORY"
 
   for url in "${PROGRAMS_TO_INSTALL_RPM[@]}"; do
-    package_name=$(basename "$url")
+    package_name="$(basename "$url")"
     destination_path="$DOWNLOAD_PROGRAMS_DIRECTORY/$package_name"
 
     echo -e "${GREEN}[INFO] - Downloading package from URL: $url${NO_COLOR}"
@@ -164,6 +166,12 @@ download_rpm_packages () {
   done
 }
 
+install_linux_toys () {
+  echo -e "${GREEN}[INFO] - Installing Linux toys...${NO_COLOR}"
+  sudo dnf copr enable psygreg/linuxtoys
+  sudo dnf install linuxtoys
+}
+
 install_syncthing () {
   echo -e "${GREEN}[INFO] - Installing Syncthing...${NO_COLOR}"
   sudo dnf install syncthing -y
@@ -171,22 +179,34 @@ install_syncthing () {
 }
 
 # Android Studio
-add_android_sdk () {
-  echo -e "${GREEN}[INFO] - Adding Android SDK to the PATH...${NO_COLOR}"
-  echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.bashrc
-  echo 'export PATH=$PATH:$ANDROID_HOME/tools' >> ~/.bashrc
-}
+#add_android_sdk () {
+#  echo -e "${GREEN}[INFO] - Adding Android SDK to the PATH...${NO_COLOR}"
+# echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.bashrc
+#  echo 'export PATH=$PATH:$ANDROID_HOME/tools' >> ~/.bashrc
+#}
 
 add_open_with_code () {
  echo -e "${GREEN}[INFO] - Adding Open With Code Extension (wget)...${NO_COLOR}"
  wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh | bash
 }
 
+run_step() {
+  local step_name="$1"
+
+  if ! declare -F "$step_name" > /dev/null; then
+    echo -e "${RED}[ERROR] - Invalid step: $step_name${NO_COLOR}"
+    exit 1
+  fi
+
+  "$step_name"
+}
+
 #----# Execution #----#
-install_dnf_packages
-upgrade_cleanup
-install_flatpak
-download_rpm_packages
-add_open_with_code
-install_syncthing
-add_android_sdk
+run_step install_dnf_packages
+run_step upgrade_cleanup
+run_step install_flatpak
+run_step download_rpm_packages
+run_step add_open_with_code
+run_step install_syncthing
+run_step install_linux_toys
+#add_android_sdk

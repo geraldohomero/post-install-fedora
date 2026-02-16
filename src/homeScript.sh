@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
+
 RED='\e[1;91m'
 GREEN='\e[1;92m'
 BLUE='\e[1;94m'
@@ -13,15 +15,15 @@ echo -e "${GREEN}[INFO] - Adding update.sh and syncthingStatus.sh to home direct
 sleep 2
 
 # Copy the update.sh, syncthingStatus.sh and swapAudio.sh script to the home directory
-cp misc/update.sh $HOME
-cp misc/syncthingStatus.sh $HOME
-cp misc/swapAudio.sh $HOME
+install -m 755 "misc/update.sh" "$HOME/update.sh"
+install -m 755 "misc/syncthingStatus.sh" "$HOME/syncthingStatus.sh"
+install -m 755 "misc/swapAudio.sh" "$HOME/swapAudio.sh"
 
 echo -e "${GREEN}[INFO] - Making the update.sh, syncthingStatus.sh and swapAudio.sh script executable.${NO_COLOR}"
 sleep 2
-chmod +x $HOME/update.sh
-chmod +x $HOME/syncthingStatus.sh
-chmod +x $HOME/swapAudio.sh
+chmod +x "$HOME/update.sh"
+chmod +x "$HOME/syncthingStatus.sh"
+chmod +x "$HOME/swapAudio.sh"
 
 ########################################################################
 ## Download megasync-manager.sh to home directory ##
@@ -30,9 +32,9 @@ echo -e "${GREEN}[INFO] - Downloading megasync-manager.sh to home directory.${NO
 sleep 2
 
 # Download the script from the provided URL
-if wget -O $HOME/megasync-manager.sh "https://raw.githubusercontent.com/geraldohomero/megasync_multiple_instances/refs/heads/main/megasync-manager.sh"; then
+if wget -O "$HOME/megasync-manager.sh" "https://raw.githubusercontent.com/geraldohomero/megasync_multiple_instances/refs/heads/main/megasync-manager.sh"; then
     echo -e "${GREEN}[INFO] - Making megasync-manager.sh executable.${NO_COLOR}"
-    chmod +x $HOME/megasync-manager.sh
+    chmod +x "$HOME/megasync-manager.sh"
     echo -e "${GREEN}[INFO] - megasync-manager.sh downloaded and set up successfully.${NO_COLOR}"
 else
     echo -e "${RED}[ERROR] - Failed to download megasync-manager.sh.${NO_COLOR}"

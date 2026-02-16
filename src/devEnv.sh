@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
+
 RED='\e[1;91m'
 GREEN='\e[1;92m'
 BLUE='\e[1;94m'
@@ -15,25 +17,27 @@ echo -e "${PURPLE}[INFO] - Installing development tools...${NO_COLOR}"
 if ! command -v node &> /dev/null; then
   echo -e "${RED}[ERROR] - Node.js is not installed.${NO_COLOR}"
   echo -e "${GREEN}[INFO] - Installing Node.js...${NO_COLOR}"
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
     nvm install 20
   echo -e "${GREEN}[INFO] - Node.js has been successfully installed.${NO_COLOR}"
 else
   echo -e "${ORANGE}[INFO] - Node.js is already installed.${NO_COLOR}"
 fi
 
-# Anaconda https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
+# Anaconda https://repo.anaconda.com/archive/Anaconda3-2025.12-2-Linux-x86_64.sh
 if ! command -v conda &> /dev/null; then
   echo -e "${RED}[ERROR] - Anaconda is not installed.${NO_COLOR}"
   echo -e "${GREEN}[INFO] - Installing Anaconda...${NO_COLOR}"
-    wget https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh -O ~/anaconda.sh
-    bash ~/anaconda.sh -b -p $HOME/anaconda3
-    rm ~/anaconda.sh
+    wget https://repo.anaconda.com/archive/Anaconda3-2025.12-2-Linux-x86_64.sh -O "$HOME/anaconda.sh"
+    bash "$HOME/anaconda.sh" -b -p "$HOME/anaconda3"
+    rm "$HOME/anaconda.sh"
     echo 'export PATH="$HOME/anaconda3/bin:$PATH"' >> ~/.bashrc
-    source ~/.bashrc
+    export PATH="$HOME/anaconda3/bin:$PATH"
   echo -e "${GREEN}[INFO] - Anaconda has been successfully installed.${NO_COLOR}"
 else
   echo -e "${ORANGE}[INFO] - Anaconda is already installed.${NO_COLOR}"
 fi
 
-# R and RStudio will be added with Distrobox or Podman (Using Ubuntu)
+# R and RStudio will be added with Distrobox or Podman (Using Ubuntu) -> better support
