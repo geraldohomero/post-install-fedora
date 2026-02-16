@@ -2,13 +2,13 @@
 
 > [简体中文](https://github.com/geraldohomero/post-install-fedora/blob/main/README.zh-cn.md) | [pt-BR](https://github.com/geraldohomero/post-install-fedora/blob/main/README.pt-br.md)
 
-A comprehensive automation script for setting up a fresh Fedora 42 Workstation installation with essential software, configurations, and development tools.
+A comprehensive automation script for setting up a fresh Fedora 43 Workstation installation with essential software, configurations, and development tools.
 
->Note: The script was designed for Fedora 42 Workstation, but it may also work on other Fedora-based distributions. However, please be cautious and ensure compatibility before running it on other systems.
+>Note: The script was designed for Fedora 43 Workstation, but it may also work on other Fedora-based distributions. However, please be cautious and ensure compatibility before running it on other systems.
 
 >Important: While the script aims to automate setup tasks, it's essential to review the code and understand what it does before running it on your machine. Ensure that you back up critical data before proceeding. The script provided is for educational purposes and comes with no warranty or support.
 
-[Fedora 42 - Post Install](https://github.com/geraldohomero/post-install-fedora)
+[Fedora 43 - Post Install](https://github.com/geraldohomero/post-install-fedora)
 
 [Pop!_OS (22.04) - Post Install](https://github.com/geraldohomero/post-install-pop-os)
 
