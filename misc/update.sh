@@ -17,6 +17,7 @@ upgrade_cleanup () {
   sudo dnf upgrade
   sudo dnf autoremove
   flatpak update
+  flatpak uninstall --unused
 }
 
 check_internet
